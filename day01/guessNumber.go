@@ -22,32 +22,31 @@ func main() {
 		inputStr string
 	)
 	for {
-		fmt.Println("确认进行游戏（y、Y、yes）")
+		// 生成随机数
+		rand.Seed(time.Now().Unix())
+		randNum = rand.Intn(100)
+		// fmt.Println(randNum)
+		for i := 1; i <= 7; i++ {
+			fmt.Println("请输入您猜测的数字：")
+			fmt.Scan(&inputNum)
+			fmt.Printf("您猜测的数字是: %d\n", inputNum)
+			if inputNum == randNum {
+				fmt.Printf("恭喜您只用了 %d 次就猜对了，您真是太聪明了！！！\n", i)
+				break
+			} else if inputNum > randNum {
+				fmt.Println("太大了！！！")
+			} else if inputNum < randNum {
+				fmt.Println("太小了！！！")
+			}
+			count++
+		}
+		if inputNum != randNum {
+			fmt.Printf("您的运气不太好，猜了 %d 次都没有猜中，不如进行下一句游戏。\n", count)
+		}
+		fmt.Println("是否继续进行游戏（y、Y、yes）")
 		fmt.Scan(&inputStr)
 		if inputStr == "yes" || inputStr == "y" || inputStr == "Y" {
-			fmt.Printf("现在正式开始游戏，生成一个数字")
-
-			// 生成随机数
-			rand.Seed(time.Now().Unix())
-			randNum = rand.Intn(100)
-			fmt.Println(randNum)
-			for i := 1; i <= 7; i++ {
-				fmt.Println("请输入您猜测的数字：")
-				fmt.Scan(&inputNum)
-				fmt.Printf("您猜测的数字是: %d\n", inputNum)
-				if inputNum == randNum {
-					fmt.Printf("恭喜您只用了 %d 次就猜对了，您真是太聪明了！！！\n", i)
-					break
-				} else if inputNum > randNum {
-					fmt.Println("太大了！！！")
-				} else if inputNum < randNum {
-					fmt.Println("太小了！！！")
-				}
-				count++
-			}
-			if inputNum != randNum {
-				fmt.Printf("您的运气不太好，猜了 %d 次都没有猜中，不如进行下一句游戏。\n", count)
-			}
+			fmt.Printf("继续进行游戏，生成一个数字")
 		} else {
 			fmt.Println("游戏结束")
 			break
